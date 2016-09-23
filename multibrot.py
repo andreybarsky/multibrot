@@ -39,7 +39,7 @@ def make_mbrot(d, scale=200, itermax=30):
         # zy = 0.0 # imaginary part
         z = complex(0.0, 0.0)
             
-        while (absc(z**2) < escape) and (iter < itermax):   # while z has not yet escaped...
+        while (abs(z**2) < escape) and (iter < itermax):   # while z has not yet escaped...
             z = z**d + c
             iter += 1
         
@@ -79,7 +79,7 @@ def make_mbrot(d, scale=200, itermax=30):
     mbrot.save(filename)
     print "\nSaved as %s" % filename
 
-drange = numpy.arange(0.0,8.1, 0.1)
+drange = numpy.arange(1.0,6.1, 0.1)
 # main loop:
 for x in drange:
     make_mbrot(float(x))
@@ -87,6 +87,6 @@ for x in drange:
 gifrange = numpy.arange(1.0, 6.1, 0.1)
 gifrange2 = numpy.arange(5.9, 1.0, -0.1)
 files = [("mbrot\\mbrot%s.png" % x) for x in numpy.concatenate([[1.0, 1.0], gifrange, [6.0, 6.0], gifrange2])]
-images = [Image.open(fn) for fn in files]
+images = [Image.open(f) for f in files]
 
 images2gif.writeGif("mbrot\\mbrot.gif", images, duration=0.05)
